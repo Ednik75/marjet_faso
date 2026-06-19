@@ -1,24 +1,22 @@
 class ApiConfig {
-  /// Production URL passed at build time:
-  /// flutter run --dart-define=API_BASE_URL=https://xxx.up.railway.app/api
-  static const String productionUrl = String.fromEnvironment(
-    'API_BASE_URL',
-    defaultValue: '',
-  );
-
-  static const String devMobileUrl = 'http://10.0.2.2:8000/api';
-  static const String devWebUrl = 'http://localhost:8000/api';
+  static const String _environmentBaseUrl = String.fromEnvironment('API_BASE_URL');
+  static const String _androidEmulatorBaseUrl = 'http://10.0.2.2:8000/api';
+  static const String _webLocalBaseUrl = 'http://localhost:8000/api';
 
   static String get baseUrl =>
-      productionUrl.isNotEmpty ? productionUrl : devMobileUrl;
+      _environmentBaseUrl.isNotEmpty ? _environmentBaseUrl : _androidEmulatorBaseUrl;
 
   static String get webBaseUrl =>
-      productionUrl.isNotEmpty ? productionUrl : devWebUrl;
+      _environmentBaseUrl.isNotEmpty ? _environmentBaseUrl : _webLocalBaseUrl;
 
   static String get effectiveBaseUrl {
+    if (_environmentBaseUrl.isNotEmpty) {
+      return _environmentBaseUrl;
+    }
+
     return const bool.fromEnvironment('dart.library.html')
-        ? webBaseUrl
-        : baseUrl;
+        ? _webLocalBaseUrl
+        : _androidEmulatorBaseUrl;
   }
 
   // Auth
