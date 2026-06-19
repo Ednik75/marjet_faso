@@ -1,0 +1,37 @@
+# Virtual environment
+venv/
+ENV/
+env/
+.env
+
+# Python caching
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django database & media
+backend/db.sqlite3
+backend/media/
+backend/staticfiles/
+
+# Flutter build & tool outputs
+frontend/.dart_tool/
+frontend/build/
+frontend/.flutter-plugins
+frontend/.flutter-plugins-dependencies
+frontend/pubspec.lock
+frontend/flutter.log
+frontend/web_server.log
+
+# IDE files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
