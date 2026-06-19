@@ -1,10 +1,21 @@
 class ApiConfig {
-  static const String baseUrl = 'http://10.0.2.2:8000/api';
-  // Use localhost for web, 10.0.2.2 for Android emulator
-  static const String webBaseUrl = 'http://localhost:8000/api';
+  /// Production URL passed at build time:
+  /// flutter run --dart-define=API_BASE_URL=https://xxx.up.railway.app/api
+  static const String productionUrl = String.fromEnvironment(
+    'API_BASE_URL',
+    defaultValue: '',
+  );
+
+  static const String devMobileUrl = 'http://10.0.2.2:8000/api';
+  static const String devWebUrl = 'http://localhost:8000/api';
+
+  static String get baseUrl =>
+      productionUrl.isNotEmpty ? productionUrl : devMobileUrl;
+
+  static String get webBaseUrl =>
+      productionUrl.isNotEmpty ? productionUrl : devWebUrl;
 
   static String get effectiveBaseUrl {
-    // For Flutter web, use localhost
     return const bool.fromEnvironment('dart.library.html')
         ? webBaseUrl
         : baseUrl;
