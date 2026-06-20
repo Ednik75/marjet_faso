@@ -49,7 +49,9 @@ class _LoginScreenState extends State<LoginScreen>
       _passwordController.text,
     );
     if (success && mounted) {
-      if (auth.isMerchant) {
+      if (auth.isAdmin) {
+        Navigator.pushReplacementNamed(context, '/admin/dashboard');
+      } else if (auth.isMerchant) {
         Navigator.pushReplacementNamed(context, '/merchant/dashboard');
       } else {
         Navigator.pushReplacementNamed(context, '/client/home');

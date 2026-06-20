@@ -50,4 +50,12 @@ class ApiConfig {
 
   // Reviews
   static const String reviews = '/reviews/';
+
+  // Admin Dashboard
+  static const String adminStats = '/admin/stats/';
+  static const String adminUsers = '/admin/users/';
+  static const String adminBoutiques = '/admin/boutiques/';
+  static const String adminProducts = '/admin/products/';
+  static const String adminOrders = '/admin/orders/';
+  static const String adminPayments = '/admin/payments/';
 }

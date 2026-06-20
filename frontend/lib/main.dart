@@ -7,10 +7,12 @@ import 'providers/product_provider.dart';
 import 'providers/stock_provider.dart';
 import 'providers/order_provider.dart';
 import 'providers/payment_provider.dart';
+import 'providers/admin_provider.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/register_screen.dart';
 import 'screens/client/home_screen.dart';
 import 'screens/merchant/merchant_dashboard_screen.dart';
+import 'screens/admin/admin_dashboard_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +32,7 @@ class MarketplaceApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => StockProvider()),
         ChangeNotifierProvider(create: (_) => OrderProvider()),
         ChangeNotifierProvider(create: (_) => PaymentProvider()),
+        ChangeNotifierProvider(create: (_) => AdminProvider()),
       ],
       child: MaterialApp(
         title: 'Marketplace Locale',
@@ -41,6 +44,7 @@ class MarketplaceApp extends StatelessWidget {
           '/register': (_) => const RegisterScreen(),
           '/client/home': (_) => const ClientHomeScreen(),
           '/merchant/dashboard': (_) => const MerchantDashboardScreen(),
+          '/admin/dashboard': (_) => const AdminDashboardScreen(),
         },
       ),
     );
@@ -86,7 +90,9 @@ class _SplashScreenState extends State<SplashScreen>
     if (!mounted) return;
 
     if (auth.isAuthenticated) {
-      if (auth.isMerchant) {
+      if (auth.isAdmin) {
+        Navigator.pushReplacementNamed(context, '/admin/dashboard');
+      } else if (auth.isMerchant) {
         Navigator.pushReplacementNamed(context, '/merchant/dashboard');
       } else {
         Navigator.pushReplacementNamed(context, '/client/home');

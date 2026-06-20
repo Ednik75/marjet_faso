@@ -15,6 +15,7 @@ class AuthProvider extends ChangeNotifier {
   String? get error => _error;
   bool get isMerchant => _user?.isMerchant ?? false;
   bool get isClient => _user?.isClient ?? false;
+  bool get isAdmin => _user?.isAdmin ?? false;
 
   Future<void> init() async {
     await _api.loadTokens();
